@@ -22,19 +22,17 @@ img {
 }
 
 .oponentArea {
-  background-color: red;
-  opacity: 0.3;
+  border: 1px solid red;
   width: 300px;
   height: 279px;
-  background-image: "/oponentShape.png";
+  background-image: url("/oponentShape.png");
   background-position: center;
 }
 .playerArea {
-  background-color: green;
-  opacity: 0.3;
+  border: 1px solid green;
   width: 300px;
   height: 279px;
-  background-image: "/playerShape.png";
+  background-image: url("/playerShape.png");
   background-position: center;
 }
 

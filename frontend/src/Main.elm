@@ -8,16 +8,27 @@ import Html.Attributes exposing (class, src)
 
 
 type DiceImage
-    = Default
+    = Blank
+    | SingleAttack
+    | SingleDefense
+    | SingleSkillpoint
+
+
+type Turn
+    = Player
+    | Oponent
 
 
 type alias Model =
-    {}
+    { currentTurn : Turn
+    , playerHealth : Int
+    , oponentHealth : Int
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( { currentTurn = Player, playerHealth = 20, oponentHealth = 20 }, Cmd.none )
 
 
 
@@ -41,15 +52,24 @@ view : Model -> Html Msg
 view model =
     div [ class "gameArea" ]
         [ div [ class "oponentArea" ] []
-        , div [ class "playerArea" ] [ diceView Default ]
+        , div [ class "playerArea" ] [ diceView Blank ]
         ]
 
 
 getDiceImageSrc : DiceImage -> String
 getDiceImageSrc image =
     case image of
-        Default ->
-            "default.png"
+        Blank ->
+            "blank.png"
+
+        SingleAttack ->
+            "singleAttack.png"
+
+        SingleDefense ->
+            "singleDefense.png"
+
+        SingleSkillpoint ->
+            "singleSkillpoint.png"
 
 
 diceView : DiceImage -> Html Msg
