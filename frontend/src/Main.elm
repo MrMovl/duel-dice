@@ -1,10 +1,14 @@
 module Main exposing (..)
 
 import Html exposing (Html, text, div, h1, img)
-import Html.Attributes exposing (src)
+import Html.Attributes exposing (class, src)
 
 
 ---- MODEL ----
+
+
+type DiceImage
+    = Default
 
 
 type alias Model =
@@ -35,10 +39,26 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ img [ src "/logo.svg" ] []
-        , h1 [] [ text "Hallo !" ]
+    div [ class "gameArea" ]
+        [ div [ class "oponentArea" ] []
+        , div [ class "playerArea" ] [ diceView Default ]
         ]
+
+
+getDiceImageSrc : DiceImage -> String
+getDiceImageSrc image =
+    case image of
+        Default ->
+            "default.png"
+
+
+diceView : DiceImage -> Html Msg
+diceView image =
+    let
+        imgSrc =
+            image |> getDiceImageSrc |> (++) "/diceImage-"
+    in
+        img [ class "diceImage", src imgSrc ] []
 
 
 
