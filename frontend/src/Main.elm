@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (Html, text, div, h1, img)
-import Html.Attributes exposing (class, src)
+import Html.Attributes exposing (class, src, id)
 
 
 ---- MODEL ----
@@ -84,8 +84,19 @@ view : Model -> Html Msg
 view model =
     div [ class "gameArea" ]
         [ div [ class "oponentArea characterArea" ] []
-        , div [ class "playerArea characterArea" ] (diceListView model)
+        , div [ class "playerArea characterArea" ] [ (handView model) ]
         ]
+
+
+handView : Model -> Html Msg
+handView model =
+    let
+        hand =
+            model.playerDice
+    in
+        div [ class "diceContainer" ]
+            [ div [ id "headSlot" ] [ diceView hand.head ]
+            ]
 
 
 getDiceImageSrc : DiceFace -> String
@@ -102,11 +113,6 @@ getDiceImageSrc image =
 
         SingleSkillpoint ->
             "singleSkillpoint.png"
-
-
-diceListView : Model -> List (Html Msg)
-diceListView model =
-    List.map diceView model.playerDice
 
 
 diceView : Dice -> Html Msg
