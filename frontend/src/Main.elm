@@ -7,7 +7,7 @@ import Html.Attributes exposing (class, src)
 ---- MODEL ----
 
 
-type DiceImage
+type DiceFace
     = Blank
     | SingleAttack
     | SingleDefense
@@ -23,12 +23,28 @@ type alias Model =
     { currentTurn : Turn
     , playerHealth : Int
     , oponentHealth : Int
+    , playerDice : List Dice
     }
+
+
+type alias Dice =
+    List DiceFace
+
+
+defaultDice : Dice
+defaultDice =
+    [ Blank, Blank, Blank, Blank, Blank, Blank ]
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { currentTurn = Player, playerHealth = 20, oponentHealth = 20 }, Cmd.none )
+    ( { currentTurn = Player
+      , playerHealth = 20
+      , oponentHealth = 20
+      , playerDice = List.repeat 6 defaultDice
+      }
+    , Cmd.none
+    )
 
 
 
@@ -51,12 +67,12 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div [ class "gameArea" ]
-        [ div [ class "oponentArea" ] []
-        , div [ class "playerArea" ] [ diceView Blank ]
+        [ div [ class "oponentArea characterArea" ] []
+        , div [ class "playerArea characterArea" ] (diceListView model)
         ]
 
 
-getDiceImageSrc : DiceImage -> String
+getDiceImageSrc : DiceFace -> String
 getDiceImageSrc image =
     case image of
         Blank ->
@@ -72,11 +88,16 @@ getDiceImageSrc image =
             "singleSkillpoint.png"
 
 
-diceView : DiceImage -> Html Msg
-diceView image =
+diceListView : Model -> List (Html Msg)
+diceListView model =
+    List.map diceView model.playerDice
+
+
+diceView : Dice -> Html Msg
+diceView dices =
     let
         imgSrc =
-            image |> getDiceImageSrc |> (++) "/diceImage-"
+            dices |> List.head |> Maybe.withDefault Blank |> getDiceImageSrc |> (++) "/diceImage-"
     in
         img [ class "diceImage", src imgSrc ] []
 

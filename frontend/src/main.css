@@ -21,22 +21,24 @@ img {
   width: 300px;
 }
 
-.oponentArea {
-  border: 1px solid red;
-  width: 300px;
+.characterArea {
+  background-size: 100%;
   height: 279px;
-  background-image: url("/oponentShape.png");
-  background-position: center;
-}
-.playerArea {
-  border: 1px solid green;
   width: 300px;
-  height: 279px;
-  background-image: url("/playerShape.png");
   background-position: center;
 }
 
+.oponentArea {
+  border: 1px solid red;
+  background-image: url("/oponentShape.png");
+}
+
+.playerArea {
+  border: 1px solid green;
+  background-image: url("/playerShape.png");
+}
+
 .diceImage {
-  width: 23px;
-  height: 23px;
+  width: 42 px;
+  height: 42px;
 }
