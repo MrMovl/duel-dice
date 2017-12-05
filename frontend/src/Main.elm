@@ -23,7 +23,7 @@ type alias Model =
     { currentTurn : Turn
     , playerHealth : Int
     , oponentHealth : Int
-    , playerDice : List Dice
+    , playerDice : Hand
     }
 
 
@@ -31,9 +31,25 @@ type alias Dice =
     List DiceFace
 
 
-defaultDice : Dice
+type alias Hand =
+    { head : Dice
+    , leftArm : Dice
+    , rightArm : Dice
+    , body : Dice
+    , leftLeg : Dice
+    , rightLeg : Dice
+    }
+
+
+defaultDice : Hand
 defaultDice =
-    [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    { head = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    , leftArm = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    , rightArm = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    , body = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    , leftLeg = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    , rightLeg = [ Blank, Blank, Blank, Blank, Blank, Blank ]
+    }
 
 
 init : ( Model, Cmd Msg )
@@ -41,7 +57,7 @@ init =
     ( { currentTurn = Player
       , playerHealth = 20
       , oponentHealth = 20
-      , playerDice = List.repeat 6 defaultDice
+      , playerDice = defaultDice
       }
     , Cmd.none
     )
