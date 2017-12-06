@@ -9,10 +9,6 @@ h1 {
   font-size: 30px;
 }
 
-img {
-  margin: 20px 0;
-  max-width: 400px;
-}
 
 .gameArea {
   margin: auto;
@@ -39,18 +35,20 @@ img {
 }
 
 .diceImage {
-  width: 42 px;
+  width: 42px;
   height: 42px;
 }
 
-#head {
+.diceContainer div {
+  position: relative;
+}
 
+#head {
+  
 }
 #leftArm {
-
 }
 #rightArm {
-
 }
 #body {
 
