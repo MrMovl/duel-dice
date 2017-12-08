@@ -95,12 +95,18 @@ handView model =
             model.playerDice
     in
         div [ class "diceContainer" ]
-            [ div [ id "head" ] [ diceView hand.head ]
-            , div [ id "leftArm" ] [ diceView hand.leftArm ]
-            , div [ id "rightArm" ] [ diceView hand.rightArm ]
-            , div [ id "leftArm" ] [ diceView hand.leftArm ]
-            , div [ id "leftArm" ] [ diceView hand.leftArm ]
-            , div [ id "leftArm" ] [ diceView hand.leftArm ]
+            [ div [ class "diceRow" ] [ div [ id "head" ] [ diceView hand.head ] ]
+            , div [ class "diceRow" ]
+                [ div [ id "leftArm" ] [ diceView hand.leftArm ]
+                , div [ id "rightArm" ] [ diceView hand.rightArm ]
+                ]
+            , div [ class "diceRow" ] []
+            , div [ class "diceRow" ] [ div [ id "body" ] [ diceView hand.body ] ]
+            , div [ class "diceRow" ] []
+            , div [ class "diceRow" ]
+                [ div [ id "leftLeg" ] [ diceView hand.leftLeg ]
+                , div [ id "rightLeg" ] [ diceView hand.rightLeg ]
+                ]
             ]
 
 
